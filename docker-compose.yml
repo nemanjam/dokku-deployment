@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  dokku:
+    container_name: dokku
+    build:
+      context: .
+      # install pack in Dockerfile
+      dockerfile: Dockerfile
+    ports:
+      - '3022:22'
+      - '443'
+      - '80'
+    environment:
+      - DOKKU_HOSTNAME
+      - DOKKU_HOST_ROOT=/var/lib/dokku/home/dokku
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./dokku-data:/mnt/dokku
+
