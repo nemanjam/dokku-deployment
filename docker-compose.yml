@@ -3,18 +3,41 @@ version: '3.8'
 services:
   dokku:
     container_name: dokku
+    restart: unless-stopped
+    # image: dokku/dokku:0.30.1
     build:
       context: .
       # install pack in Dockerfile
       dockerfile: Dockerfile
     ports:
       - '3022:22'
-      - '443'
-      - '80'
+      # ports must be free
+      - '443:443'
+      - '80:80'
     environment:
-      - DOKKU_HOSTNAME
-      - DOKKU_HOST_ROOT=/var/lib/dokku/home/dokku
+      - DOKKU_HOSTNAME=dokku.${SERVER_HOSTNAME}
+      - DOKKU_HOST_ROOT=${PWD}/dokku-data/home/dokku
     volumes:
+      - ${PWD}/dokku-data:/mnt/dokku
+      - ${PWD}/plugin-list:/mnt/dokku/plugin-list
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./dokku-data:/mnt/dokku
+    networks:
+      - dokku-external
 
+  portainer:
+    image: 'portainer/portainer-ce:2.17.0'
+    container_name: portainer
+    restart: unless-stopped
+    # open firewall
+    ports:
+      - '9443:9443'
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./portainer-data:/data
+
+networks:
+  dokku-external:
+    external: true

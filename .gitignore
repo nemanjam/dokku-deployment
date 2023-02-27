@@ -1,5 +1,13 @@
-.env
+node_modules/
+
+/**/.env
+/**/.env*.local
+
+!portainer-data
+portainer-data/*
+!portainer-data/.gitkeep
 
 !dokku-data
 dokku-data/*
-!dokku-data/plugin-list
+!dokku-data/.gitkeep
+
