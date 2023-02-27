@@ -24,7 +24,7 @@ services:
     networks:
       - dokku-external
 
-  portainer:
+  portainer-standalone:
     image: 'portainer/portainer-ce:2.17.0'
     container_name: portainer
     restart: unless-stopped

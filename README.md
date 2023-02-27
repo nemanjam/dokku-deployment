@@ -385,3 +385,14 @@ dokku traefik:set --global letsencrypt-email miroljub.petrovic.acc@gmail.com
 # report
 dokku traefik:report
 ```
+
+## Setup dokku-deployment
+
+```bash
+# create global network
+docker network create dokku-external
+
+# create .env
+cp .env.example .env
+
+```
