@@ -12,8 +12,8 @@ services:
     ports:
       - '3022:22'
       # ports must be free
-      # - '443:443'
-      # - '80:80'
+      - '443:443'
+      - '80:80'
     environment:
       - DOKKU_HOSTNAME=dokku.${SERVER_HOSTNAME}
       - DOKKU_HOST_ROOT=${PWD}/dokku-data/home/dokku
@@ -37,7 +37,11 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./portainer-data:/data
+    networks:
+      - default
 
 networks:
   dokku-external:
     external: true
+  default:
+    internal: true

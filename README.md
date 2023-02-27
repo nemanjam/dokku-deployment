@@ -395,4 +395,10 @@ docker network create dokku-external
 # create .env
 cp .env.example .env
 
+# open 9433 destination port on server
+
 ```
+
+### Access Portainer
+
+https://arm1.localhost3002.live:9443
