@@ -1,0 +1,4 @@
+git remote add all git@github.com:nemanjam/dokku-deployment.git && \
+git remote set-url --add --push all git@github.com:nemanjam/dokku-deployment.git && \
+git remote set-url --add --push all git@gitlab.com:nemanjam/dokku-deployment.git && \
+git remote -v
