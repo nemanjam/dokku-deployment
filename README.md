@@ -367,13 +367,16 @@ dokku proxy:build-config nextjs-app
 # create and run containers
 ```
 
-### Switch to Traefik proxy for Lets encrypt
+### Switch to Traefik proxy for Lets encrypt, because Nginx letsencrypt is broken
 
 ```bash
-# switch to treafik
+# create app
+dokku apps:create nextjs-app
+
+# switch to treafik, set this before push to avoid rebuild
 dokku proxy:set nextjs-app traefik
 
-# rebuild app, not just proxy
+# rebuild app, not just proxy, only if pushed already
 dokku ps:rebuild nextjs-app
 
 # start/stop treafik
@@ -396,6 +399,15 @@ docker network create dokku-external
 cp .env.example .env
 
 # open 9433 destination port on server
+
+# attach to network, global
+dokku network:set --global initial-network dokku-external
+
+# attach app to network
+dokku network:set nextjs-app initial-network dokku-external
+
+# switch to traefik
+
 
 ```
 
