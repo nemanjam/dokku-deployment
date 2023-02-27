@@ -156,10 +156,15 @@ ssh ubuntu@arm1 "docker exec dokku bash dokku ssh-keys:list"
 docker run --privileged --rm tonistiigi/binfmt --install all
 ```
 
-# Attach all app containers to traefik and dokku external network - IMPORTANT
+# Attach all app containers to traefik and dokku external network - IMPORTANT (only for Nginx)
 
 ```bash
+# this attaches to Nginx but detaches from traefik
 dokku network:set --global initial-network proxy
+
+# this exposes app to host without proxy, 0.0.0.0:32770:5000, host:container
+# i dont need this
+ dokku network:set --global bind-all-interfaces true
 ```
 
 ### Add remote, create app and push
@@ -380,9 +385,12 @@ dokku proxy:set nextjs-app traefik
 dokku ps:rebuild nextjs-app
 
 # start/stop treafik
+# problem: this container is on separate network from app and dokku containers
+# must disable 80 on dokku container to free it for traefik, nginx goes through dokku, wtf
 dokku traefik:start
 
 # enable letsencrypt for traefik globally
+# must rebuild apps and restart traefik, damn
 dokku traefik:set --global letsencrypt-email miroljub.petrovic.acc@gmail.com
 
 # report
