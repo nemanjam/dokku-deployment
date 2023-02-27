@@ -44,4 +44,4 @@ networks:
   dokku-external:
     external: true
   default:
-    name: default
+    name: portainer-standalone
