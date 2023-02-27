@@ -26,7 +26,7 @@ services:
 
   portainer-standalone:
     image: 'portainer/portainer-ce:2.17.0'
-    container_name: portainer
+    container_name: portainer-standalone
     restart: unless-stopped
     # open firewall
     ports:
