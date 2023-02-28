@@ -201,6 +201,12 @@ dokku plugin:installed letsencrypt
 
 # if not installed already
 dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
+dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git --committish 0.17.0
+
+dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git --committish 0.19.0
+
+# uninstall
+dokku plugin:uninstall letsencrypt
 
 # set global email for all apps
 # cant be set per app...
