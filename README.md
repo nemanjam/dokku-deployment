@@ -160,7 +160,7 @@ docker run --privileged --rm tonistiigi/binfmt --install all
 
 ```bash
 # this attaches to Nginx but detaches from traefik
-dokku network:set --global initial-network proxy
+dokku network:set --global initial-network dokku-external
 
 # this exposes app to host without proxy, 0.0.0.0:32770:5000, host:container
 # i dont need this
