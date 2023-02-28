@@ -115,19 +115,19 @@ source ~/.bashrc
 ```bash
 # remove dokku container
 ssh ubuntu@arm1 "
-cd ~/traefik-proxy/apps/dokku &&
+cd ~/dokku-deployment &&
 docker compose down
 "
 
 # delete dokku volume
 ssh ubuntu@arm1 "
-sudo rm -rf ~/traefik-proxy/apps/dokku/dokku-data &&
-ls -la ~/traefik-proxy/apps/dokku
+sudo rm -rf ~/dokku-deployment/dokku-data &&
+ls -la ~/dokku-deployment
 "
 
 # start dokku container
 ssh ubuntu@arm1 "
-cd ~/traefik-proxy/apps/dokku &&
+cd ~/dokku-deployment &&
 docker compose up -d
 "
 ```
